@@ -3,9 +3,9 @@ import Header from './Header'
 import checkValidData from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase"
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/slices/userSlice';
+import { USER_LOGO } from '../utils/constants';
 
 
 const Login = () => {
@@ -13,7 +13,6 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState(null)
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const name = useRef(null);
     const email = useRef(null);
@@ -46,12 +45,11 @@ const Login = () => {
                     // Signed up 
                     const user = userCredential.user;
                     updateProfile(user, {
-                        displayName: nameValue, photoURL: "https://static.vecteezy.com/system/resources/thumbnails/021/746/785/small_2x/holding-a-tree-in-a-ball-ecology-and-environment-concept-with-generative-ai-photo.jpg"
+                        displayName: nameValue, photoURL: USER_LOGO
                     }).then(() => {
                         const { uid, email, displayName, photoURL } = auth.currentUser;
                         console.log(user)
                         dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
-                        navigate("/browse")
                     }).catch((error) => {
                         setErrorMessage(error.message)
                     });
@@ -71,7 +69,6 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user)
-                    navigate("/browse")
                 })
                 .catch((error) => {
                     const errorCode = error.code;
