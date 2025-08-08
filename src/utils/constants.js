@@ -2,6 +2,8 @@ export const LOGO = "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_produ
 
 export const USER_LOGO = "https://static.vecteezy.com/system/resources/thumbnails/021/746/785/small_2x/holding-a-tree-in-a-ball-ecology-and-environment-concept-with-generative-ai-photo.jpg";
 
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w400"
+
 export const API_OPTIONS = {
     method: 'GET',
     headers: {
